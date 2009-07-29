@@ -1,5 +1,7 @@
 package Data::Serializable;
 
+use 5.006; # Found with Perl::MinimumVersion
+
 use Moose::Role;
 
 use Class::MOP ();
