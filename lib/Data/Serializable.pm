@@ -14,6 +14,8 @@ use namespace::autoclean -also => [
     '_build_deserializer',
 ];
 
+=encoding utf8
+
 =head1 NAME
 
 Data::Serializable - Moose-based role that adds serialization support to any class
