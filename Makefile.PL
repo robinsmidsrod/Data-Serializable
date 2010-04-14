@@ -1,4 +1,4 @@
-use inc::Module::Install 0.91;
+use inc::Module::Install 0.95;
 
 name     'Data-Serializable';
 author   'Robin Smidsrød <robin@smidsrod.no>';
