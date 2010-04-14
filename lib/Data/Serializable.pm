@@ -26,7 +26,7 @@ Version 0.02
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -182,6 +182,7 @@ sub _build_deserializer {
     # Just return sub if using default
     if ( $module eq 'Storable' ) {
         return sub {
+            return undef if @_ > 0 and not defined( $_[0] );
             return ${ Storable::thaw( $_[0] ) };
         };
     }
@@ -189,6 +190,7 @@ sub _build_deserializer {
     # Return the specified serializer if we know about it
     if ( $module->can('deserialize') ) {
         return sub {
+            return undef if @_ > 0 and not defined( $_[0] );
             # Data::Serializer::* has a static method called deserialize()
             return _unwrap_invalid(
                 $module, $module->deserialize( $_[0] )
