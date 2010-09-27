@@ -10,6 +10,8 @@ use 5.006; # Found with Perl::MinimumVersion
 use Class::MOP ();
 use Carp qw(croak confess);
 
+# Wrap data structure that is not a hash-ref
+# FIXME: Technically we should allow array-ref, as JSON standard allows it
 sub _wrap_invalid {
     my ($module, $obj) = @_;
     if ( $module eq 'Data::Serializer::JSON' ) {
@@ -18,6 +20,7 @@ sub _wrap_invalid {
     return $obj;
 }
 
+# Unwrap JSON previously wrapped with _wrap_invalid()
 sub _unwrap_invalid {
     my ($module, $obj) = @_;
     if ( $module eq 'Data::Serializer::JSON' ) {
