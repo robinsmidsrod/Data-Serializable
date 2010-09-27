@@ -10,13 +10,6 @@ use 5.006; # Found with Perl::MinimumVersion
 use Class::MOP ();
 use Carp qw(croak confess);
 
-use namespace::autoclean -also => [
-    '_wrap_invalid',
-    '_unwrap_invalid',
-    '_build_serializer',
-    '_build_deserializer',
-];
-
 sub _wrap_invalid {
     my ($module, $obj) = @_;
     if ( $module eq 'Data::Serializer::JSON' ) {
@@ -199,6 +192,7 @@ sub deserialize {
     return $deserialized;
 }
 
+no Moose::Role;
 1;
 
 __END__
