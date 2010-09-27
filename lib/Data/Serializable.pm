@@ -1,9 +1,9 @@
 use strict;
 use warnings;
+use 5.006; # Found with Perl::MinimumVersion
 
 package Data::Serializable;
 use Moose::Role;
-use 5.006; # Found with Perl::MinimumVersion
 
 # ABSTRACT: Moose role that adds serialization support to any class
 
