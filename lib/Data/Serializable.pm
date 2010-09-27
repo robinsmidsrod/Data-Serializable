@@ -85,7 +85,7 @@ sub _build_serializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubrou
     if( $module ne 'Storable' ) {
         $module = 'Data::Serializer::' . $module;
     }
-    
+
     # Make sure serializer module is loaded
     Class::MOP::load_class( $module );
 
@@ -105,7 +105,7 @@ sub _build_serializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubrou
             );
         };
     }
-    
+
     confess("Unsupported serializer specified");
 }
 
@@ -131,7 +131,7 @@ sub _build_deserializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubr
     if( $module ne 'Storable' ) {
         $module = 'Data::Serializer::' . $module;
     }
-    
+
     # Make sure serializer module is loaded
     Class::MOP::load_class( $module );
 
@@ -142,7 +142,7 @@ sub _build_deserializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubr
             return ${ Storable::thaw( $_[0] ) };
         };
     }
-    
+
     # Return the specified serializer if we know about it
     if ( $module->can('deserialize') ) {
         return sub {
@@ -153,7 +153,7 @@ sub _build_deserializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubr
             );
         };
     }
-    
+
     confess("Unsupported deserializer specified");
 }
 
