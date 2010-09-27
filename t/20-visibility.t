@@ -7,6 +7,7 @@ use Test::More tests => 9;
 package MyClass;
 use Moose;
 with 'Data::Serializable';
+no Moose;
 
 package main;
 my $obj = MyClass->new();

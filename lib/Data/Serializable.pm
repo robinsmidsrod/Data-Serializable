@@ -202,6 +202,7 @@ __END__
     package MyClass;
     use Moose;
     with 'Data::Serializable';
+    no Moose;
 
     package main;
     my $obj = MyClass->new( serializer_module => 'JSON' );

@@ -10,6 +10,7 @@ package MyClass;
 use Moose;
 with 'Data::Serializable';
 #has '+throws_exception' => ( default => 0 );
+no Moose;
 
 package main;
 my $obj = MyClass->new( serializer_module => 'JSON' );

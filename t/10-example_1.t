@@ -7,6 +7,7 @@ use Test::More tests => 2;
 package MyClass;
 use Moose;
 with 'Data::Serializable';
+no Moose;
 
 package main;
 
