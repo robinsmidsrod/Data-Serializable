@@ -12,6 +12,6 @@ package main;
 
 my $obj = MyClass->new( serializer_module => 'JSON' );
 my $json = $obj->serialize( "Foo" );
-is($json, '{"_serialized_object":"Foo"}', '"Foo" doesn\'t serialize correctly');
+is($json, '{"_serialized_object":"Foo"}', '"Foo" serializes correctly');
 my $str = $obj->deserialize( $json );
-is($str, 'Foo', '"Foo" doesn\'t deserialize correctly');
+is($str, 'Foo', '"Foo" deserializes correctly');
