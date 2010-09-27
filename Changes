@@ -1,5 +1,10 @@
 Revision history for Data-Serializable
 
+{{$NEXT}}
+	Migrated from Module::Install to Dist::Zilla
+	Now uses Semantic Versioning (http://semver.org/)
+	 - Hopefully 0.40.0 is equiv. to 0.04 (old-style)
+
 0.03	2010-04-14
 	Added minimum perl version (used Perl::MinimumVersion)
 	Updated to Module::Install 0.95
