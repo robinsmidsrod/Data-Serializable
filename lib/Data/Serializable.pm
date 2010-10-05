@@ -11,11 +11,18 @@ use Class::MOP ();
 use Carp qw(croak confess);
 
 # Wrap data structure that is not a hash-ref
-# FIXME: Technically we should allow array-ref, as JSON standard allows it
 sub _wrap_invalid {
     my ($module, $obj) = @_;
+    # JSON doesn't know how to serialize anything but hashrefs
+    # FIXME: Technically we should allow array-ref, as JSON standard allows it
     if ( $module eq 'Data::Serializer::JSON' ) {
         return ref($obj) eq 'HASH' ? $obj : { '_serialized_object' => $obj };
+    }
+    # XML::Simple doesn't know the difference between empty string and undef
+    if ( $module eq 'Data::Serializer::XML::Simple' ) {
+        return { '_serialized_object_is_undef' => 1 } unless defined($obj);
+        return $obj if ref($obj) eq 'HASH';
+        return { '_serialized_object' => $obj };
     }
     return $obj;
 }
@@ -24,8 +31,21 @@ sub _wrap_invalid {
 sub _unwrap_invalid {
     my ($module, $obj) = @_;
     if ( $module eq 'Data::Serializer::JSON' ) {
-        if ( ref($obj) eq 'HASH' and keys %$obj == 1 and exists($obj->{'_serialized_object'}) ) {
+        if ( ref($obj) eq 'HASH' and keys %$obj == 1 and exists( $obj->{'_serialized_object'} ) ) {
             return $obj->{'_serialized_object'};
+        }
+        return $obj;
+    }
+    # XML::Simple doesn't know the difference between empty string and undef
+    if ( $module eq 'Data::Serializer::XML::Simple' ) {
+        if ( ref($obj) eq 'HASH' and keys %$obj == 1 ) {
+            if ( exists $obj->{'_serialized_object_is_undef'}
+                and $obj->{'_serialized_object_is_undef'} )
+            {
+                return undef; ## no critic qw(Subroutines::ProhibitExplicitReturnUndef)
+            }
+            return $obj->{'_serialized_object'} if exists $obj->{'_serialized_object'};
+            return $obj;
         }
         return $obj;
     }
@@ -96,17 +116,22 @@ sub _build_serializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubrou
         };
     }
 
-    # Return the specified serializer if we know about it
-    if ( $module->can('serialize') ) {
-        return sub {
-            # Data::Serializer::* has a static method called serialize()
-            return $module->serialize(
-                _wrap_invalid( $module, $_[0] )
-            );
-        };
+    unless ( $module->isa('Data::Serializer') ) {
+        confess("Serializer module '$module' is not a subclass of Data::Serializer");
+    }
+    my $handler = bless {}, $module; # subclasses apparently doesn't implement new(), go figure!
+    unless ( $handler->can('serialize') ) {
+        confess("Serializer module '$module' doesn't implement the serialize() method");
     }
 
-    confess("Unsupported serializer specified");
+    # Return the specified serializer if we know about it
+    return sub {
+        # Data::Serializer::* has an instance method called serialize()
+        return $handler->serialize(
+            _wrap_invalid( $module, $_[0] )
+        );
+    };
+
 }
 
 =attr deserializer
@@ -143,18 +168,23 @@ sub _build_deserializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubr
         };
     }
 
-    # Return the specified serializer if we know about it
-    if ( $module->can('deserialize') ) {
-        return sub {
-            return if @_ > 0 and not defined( $_[0] );
-            # Data::Serializer::* has a static method called deserialize()
-            return _unwrap_invalid(
-                $module, $module->deserialize( $_[0] )
-            );
-        };
+    unless ( $module->isa('Data::Serializer') ) {
+        confess("Serializer module '$module' is not a subclass of Data::Serializer");
+    }
+    my $handler = bless {}, $module; # subclasses apparently doesn't implement new(), go figure!
+    unless ( $handler->can('deserialize') ) {
+        confess("Serializer module '$module' doesn't implement the deserialize() method");
     }
 
-    confess("Unsupported deserializer specified");
+    # Return the specified serializer if we know about it
+    return sub {
+        return if @_ > 0 and not defined( $_[0] );
+        # Data::Serializer::* has an instance method called deserialize()
+        return _unwrap_invalid(
+            $module, $handler->deserialize( $_[0] )
+        );
+    };
+
 }
 
 =method serialize($message)
