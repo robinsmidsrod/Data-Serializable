@@ -1,6 +1,8 @@
 Revision history for Data-Serializable
 
 {{$NEXT}}
+
+0.40.1    2010-10-05 13:15:30 Europe/Oslo
 	Fix for RT#61885 (reported by Kaare Rasmussen)
          - XML::Simple serializer didn't work at all.
 
