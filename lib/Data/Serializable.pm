@@ -7,7 +7,7 @@ use Moose::Role;
 
 # ABSTRACT: Moose role that adds serialization support to any class
 
-use Class::MOP ();
+use Module::Runtime ();
 use Carp qw(croak confess);
 
 # Wrap data structure that is not a hash-ref
@@ -107,7 +107,7 @@ sub _build_serializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubrou
     }
 
     # Make sure serializer module is loaded
-    Class::MOP::load_class( $module );
+    Module::Runtime::require_module( $module );
 
     # Just return sub if using default
     if ( $module eq 'Storable' ) {
@@ -158,7 +158,7 @@ sub _build_deserializer { ## no critic qw(Subroutines::ProhibitUnusedPrivateSubr
     }
 
     # Make sure serializer module is loaded
-    Class::MOP::load_class( $module );
+    Module::Runtime::require_module( $module );
 
     # Just return sub if using default
     if ( $module eq 'Storable' ) {
