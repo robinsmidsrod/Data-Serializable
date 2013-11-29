@@ -28,14 +28,14 @@ are not useful for you.
 
 # ATTRIBUTES
 
-## throws_exception
+## throws\_exception
 
 Defines if methods should throw exceptions or return undef. Default is to throw exceptions.
 Override default value like this:
 
     has '+throws_expection' => ( default => 0 );
 
-## serializer_module
+## serializer\_module
 
 Name of a predefined module that you wish to use for serialization.
 Any submodule of [Data::Serializer](http://search.cpan.org/perldoc?Data::Serializer) is automatically supported.
@@ -72,66 +72,72 @@ Runs the deserializer on the specified argument.
 
 You can find documentation for this module with the perldoc command.
 
-  perldoc Data::Serializable
+    perldoc Data::Serializable
 
 ## Websites
 
 The following websites have more information about this module, and may be of help to you. As always,
 in addition to those websites please use your favorite search engine to discover more resources.
 
+- MetaCPAN
+
+    A modern, open-source CPAN search engine, useful to view POD in HTML format.
+
+    [http://metacpan.org/release/Data-Serializable](http://metacpan.org/release/Data-Serializable)
+
 - Search CPAN
 
-The default CPAN search engine, useful to view POD in HTML format.
+    The default CPAN search engine, useful to view POD in HTML format.
 
-[http://search.cpan.org/dist/Data-Serializable](http://search.cpan.org/dist/Data-Serializable)
+    [http://search.cpan.org/dist/Data-Serializable](http://search.cpan.org/dist/Data-Serializable)
 
 - RT: CPAN's Bug Tracker
 
-The RT ( Request Tracker ) website is the default bug/issue tracking system for CPAN.
+    The RT ( Request Tracker ) website is the default bug/issue tracking system for CPAN.
 
-[http://rt.cpan.org/NoAuth/Bugs.html?Dist=Data-Serializable](http://rt.cpan.org/NoAuth/Bugs.html?Dist=Data-Serializable)
+    [http://rt.cpan.org/NoAuth/Bugs.html?Dist=Data-Serializable](http://rt.cpan.org/NoAuth/Bugs.html?Dist=Data-Serializable)
 
 - AnnoCPAN
 
-The AnnoCPAN is a website that allows community annonations of Perl module documentation.
+    The AnnoCPAN is a website that allows community annotations of Perl module documentation.
 
-[http://annocpan.org/dist/Data-Serializable](http://annocpan.org/dist/Data-Serializable)
+    [http://annocpan.org/dist/Data-Serializable](http://annocpan.org/dist/Data-Serializable)
 
 - CPAN Ratings
 
-The CPAN Ratings is a website that allows community ratings and reviews of Perl modules.
+    The CPAN Ratings is a website that allows community ratings and reviews of Perl modules.
 
-[http://cpanratings.perl.org/d/Data-Serializable](http://cpanratings.perl.org/d/Data-Serializable)
+    [http://cpanratings.perl.org/d/Data-Serializable](http://cpanratings.perl.org/d/Data-Serializable)
 
 - CPAN Forum
 
-The CPAN Forum is a web forum for discussing Perl modules.
+    The CPAN Forum is a web forum for discussing Perl modules.
 
-[http://cpanforum.com/dist/Data-Serializable](http://cpanforum.com/dist/Data-Serializable)
+    [http://cpanforum.com/dist/Data-Serializable](http://cpanforum.com/dist/Data-Serializable)
 
 - CPANTS
 
-The CPANTS is a website that analyzes the Kwalitee ( code metrics ) of a distribution.
+    The CPANTS is a website that analyzes the Kwalitee ( code metrics ) of a distribution.
 
-[http://cpants.perl.org/dist/overview/Data-Serializable](http://cpants.perl.org/dist/overview/Data-Serializable)
+    [http://cpants.perl.org/dist/overview/Data-Serializable](http://cpants.perl.org/dist/overview/Data-Serializable)
 
 - CPAN Testers
 
-The CPAN Testers is a network of smokers who run automated tests on uploaded CPAN distributions.
+    The CPAN Testers is a network of smokers who run automated tests on uploaded CPAN distributions.
 
-[http://www.cpantesters.org/distro/D/Data-Serializable](http://www.cpantesters.org/distro/D/Data-Serializable)
+    [http://www.cpantesters.org/distro/D/Data-Serializable](http://www.cpantesters.org/distro/D/Data-Serializable)
 
 - CPAN Testers Matrix
 
-The CPAN Testers Matrix is a website that provides a visual way to determine what Perls/platforms PASSed for a distribution.
+    The CPAN Testers Matrix is a website that provides a visual overview of the test results for a distribution on various Perls/platforms.
 
-[http://matrix.cpantesters.org/?dist=Data-Serializable](http://matrix.cpantesters.org/?dist=Data-Serializable)
+    [http://matrix.cpantesters.org/?dist=Data-Serializable](http://matrix.cpantesters.org/?dist=Data-Serializable)
 
 - CPAN Testers Dependencies
 
-The CPAN Testers Dependencies is a website that shows a chart of the test results of all dependencies for a distribution.
+    The CPAN Testers Dependencies is a website that shows a chart of the test results of all dependencies for a distribution.
 
-[http://deps.cpantesters.org/?module=Data::Serializable](http://deps.cpantesters.org/?module=Data::Serializable)
+    [http://deps.cpantesters.org/?module=Data::Serializable](http://deps.cpantesters.org/?module=Data::Serializable)
 
 ## Bugs / Feature Requests
 
@@ -147,7 +153,7 @@ from your repository :)
 
 [http://github.com/robinsmidsrod/Data-Serializable](http://github.com/robinsmidsrod/Data-Serializable)
 
-  git clone git://github.com/robinsmidsrod/Data-Serializable.git
+    git clone git://github.com/robinsmidsrod/Data-Serializable.git
 
 # AUTHOR
 
@@ -155,7 +161,7 @@ Robin Smidsrød <robin@smidsrod.no>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Robin Smidsrød.
+This software is copyright (c) 2013 by Robin Smidsrød.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
